@@ -8,7 +8,7 @@ namespace LinkedDataProjectAPI.Repository
 {
     public interface IWikidataRepository
     {
-
+        public string PerformAction(string action, string qs);
     }
 
     public class WikidataRepository : IWikidataRepository

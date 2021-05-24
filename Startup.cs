@@ -1,3 +1,4 @@
+using LinkedDataProjectAPI.Repository;
 using LinkedDataProjectAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,7 @@ namespace LinkedDataProjectAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepositories();
             services.AddServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
