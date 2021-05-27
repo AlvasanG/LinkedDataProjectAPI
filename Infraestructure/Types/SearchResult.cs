@@ -6,6 +6,15 @@
         public string url { get; set; }
         public string description { get; set; }
         public string label { get; set; }
+
+        public SearchResult()
+        {
+            id = string.Empty;
+            url = string.Empty;
+            description = string.Empty;
+            label = string.Empty;
+        }
+
         public SearchResult(string id, string url, string description, string label)
         {
             this.id = id;

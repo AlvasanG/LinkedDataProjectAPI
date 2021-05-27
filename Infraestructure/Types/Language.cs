@@ -4,6 +4,13 @@
     {
         public string language { get; set; }
         public string value { get; set; }
+
+        public Language()
+        {
+            language = string.Empty;
+            value = string.Empty;
+        }
+
         public Language(string language, string value)
         {
             this.language = language;

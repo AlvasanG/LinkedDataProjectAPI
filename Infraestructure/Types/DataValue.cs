@@ -6,6 +6,13 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
     {
         public JToken value { get; set; }
         public string type { get; set; }
+
+        public DataValue()
+        {
+            value = JToken.Parse("");
+            type = string.Empty;
+        }
+
         public DataValue(JToken value, string type)
         {
             this.value = value;

@@ -16,6 +16,22 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         public IDictionary<string, Language> descriptions { get; set; }
         public IDictionary<string, IList<Claim>> claims { get; set; }
         public IDictionary<string, SiteLink> siteLinks { get; set; }
+
+        public Entity()
+        {
+            title = string.Empty;
+            id = string.Empty;
+            ns = 0;
+            lastRevId = 0;
+            modified = new DateTime();
+            type = string.Empty;
+            labes = new Dictionary<string, Language>();
+            aliases = new Dictionary<string, IList<Language>>();
+            descriptions = new Dictionary<string, Language>();
+            claims = new Dictionary<string, IList<Claim>>();
+            siteLinks = new Dictionary<string, SiteLink>();
+        }
+
         public Entity(string title, string id, int ns, int lastRevId,
             DateTime modified, string type, IDictionary<string, Language> labes,
             IDictionary<string, IList<Language>> aliases, IDictionary<string, Language> descriptions,

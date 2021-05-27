@@ -1,4 +1,4 @@
-﻿using LinkedDataProjectAPI.Services.Implementatios;
+﻿using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ namespace LinkedDataProjectAPI.Services
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             // Add services here
-            services.AddScoped<IGetEntitiesService, GetEntitiesService>();
+            services.AddScoped<IEntitiesService, EntitiesService>();
+            services.AddScoped<ILanguageSearchService, LanguageSearchService>();
 
             return services;
         }

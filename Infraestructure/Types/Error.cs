@@ -10,6 +10,13 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public string code { get; set; }
         public string info { get; set; }
+
+        public Error()
+        {
+            code = string.Empty;
+            info = string.Empty;
+        }
+
         public Error(string code, string info)
         {
             this.code = code;

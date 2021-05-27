@@ -10,6 +10,12 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         public Error error { get; set; }
         public string servedBy { get; set; }
 
+        public ErrorMessage()
+        {
+            error = new Error();
+            servedBy = string.Empty;
+        }
+
         public ErrorMessage(Error error, string servedby)
         {
             this.error = error;

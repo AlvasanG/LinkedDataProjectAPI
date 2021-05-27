@@ -31,5 +31,38 @@ namespace LinkedDataProjectAPI.Infraestructure
             }
             return true;
         }
+
+        public static string ConcatenateToUrl(string propName, string[] props)
+        {
+            if (props == null || props.Length < 1)
+            {
+                return "";
+            }
+            var qs = "&" + propName + "=";
+            for (var i = 0; i < props.Length; i++)
+            {
+                if (i == 0 && props.Length > 1)
+                {
+                    qs += props[i] + "|";
+                }
+                else if (i == props.Length - 1)
+                {
+                    qs += props[i];
+                }
+                else
+                {
+                    qs += props[i] + "|";
+                }
+            }
+            return qs;
+        }
+
+        public static void Merge<V, K>(ref IDictionary<V, K> mainDic, IDictionary<V, K> secondDic)
+        {
+            foreach(var entry in secondDic)
+            {
+                mainDic.Add(entry.Key, entry.Value);
+            }
+        }
     }
 }
