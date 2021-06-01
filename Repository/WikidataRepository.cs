@@ -30,6 +30,7 @@ namespace LinkedDataProjectAPI.Repository
             try
             {
                 var req = WebRequest.Create(new Uri(url));
+                Log.Information(url);
                 var resp = req.GetResponse();
                 return new StreamReader(resp.GetResponseStream()).ReadToEnd();
             }

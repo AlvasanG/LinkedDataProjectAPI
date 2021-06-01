@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Infraestructure.Types
 {
@@ -10,18 +8,17 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public string code { get; set; }
         public string info { get; set; }
+        public int id { get; set; }
+        public IEnumerable<Message> messages { get; set; }
+        [JsonProperty("*")]
+        public string star {get; set; }
+
 
         public Error()
         {
             code = string.Empty;
             info = string.Empty;
+            star = string.Empty;
         }
-
-        public Error(string code, string info)
-        {
-            this.code = code;
-            this.info = info;
-        }
-
     }
 }

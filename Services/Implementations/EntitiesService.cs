@@ -15,20 +15,9 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
     public interface IEntitiesService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <param name="languages"></param>
-        /// <param name="props"></param>
-        /// <returns></returns>
+
         public SearchValuesDto GetEntities(string[] ids, string[] languages, string[] props);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public SearchValuesDto GetSingleEntity(string id);
 
 
@@ -38,12 +27,10 @@ namespace LinkedDataProjectAPI.Services.Implementations
     {
         private const string OPERATION = "wbgetentities";
         private readonly IWikidataRepository _wikiRepo;
-        private readonly ILanguageSearchService _langServ;
 
-        public EntitiesService(IWikidataRepository wikidataRepository, ILanguageSearchService langService)
+        public EntitiesService(IWikidataRepository wikidataRepository)
         {
             _wikiRepo = wikidataRepository;
-            _langServ = langService;
         }
 
         public SearchValuesDto GetSingleEntity(string id)
@@ -60,33 +47,29 @@ namespace LinkedDataProjectAPI.Services.Implementations
             string qs = Utils.ConcatenateToUrl("ids", ids);
             if (languages != null)
             {
-                if (!_langServ.CheckLanguageIsSupportedEntities(languages))
-                {
-                    throw new ArgumentException("Some languages are not supported for this operation");
-                }
                 qs += Utils.ConcatenateToUrl("languages", languages);
             }
             if(props != null)
             {
-                if (!Utils.CheckCorrectParametersGetEntities(props))
-                {
-                    throw new ArgumentException("Some parameters (props) are not supported for this operation");
-                }
+                //if (!Utils.CheckCorrectParametersGetEntities(props))
+                //{
+                //    throw new ArgumentException("Some parameters (props) are not supported for this operation");
+                //}
                 qs += Utils.ConcatenateToUrl("props", props);
             }
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
-            try
-            {
+            //try
+            //{
                 var data = JsonConvert.DeserializeObject<Data>(stringData);
                 var warnings = JsonConvert.DeserializeObject<Warning>(stringData);
-                var errors = JsonConvert.DeserializeObject<Error>(stringData);
+                var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
                 return new SearchValuesDto(data, warnings, errors);
-            }
-            catch (JsonException)
-            {
-                Log.Error("Something went wrong parsing the query response.");
-                return new SearchValuesDto();
-            }
+            //}
+            //catch (JsonException)
+            //{
+            //    Log.Error("Something went wrong parsing the query response.");
+            //    return new SearchValuesDto();
+            //}
         }
     }
 }

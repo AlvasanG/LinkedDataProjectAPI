@@ -1,5 +1,6 @@
 ﻿using LinkedDataProjectAPI.Controllers.DTOs;
 using LinkedDataProjectAPI.Infraestructure.Types;
+using LinkedDataProjectAPI.Infraestructure.Types.DTOs;
 using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,15 +24,13 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/single")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<Data>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<SearchValuesDto>))]
         public IActionResult GetSingleEntity([FromQuery] string id)
         {
             var result = _entitySvc.GetSingleEntity(id);
-            return Ok(new ResponseDto<Data>
+            return Ok(new ResponseDto<SearchValuesDto>
             {
-                Result = result.data,
-                Error = result.errors,
-                Warning = result.warnings,
+                Result = result,
                 Succeeded = true
             });
         }

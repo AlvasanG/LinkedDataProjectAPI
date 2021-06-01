@@ -18,21 +18,5 @@
             Succeeded: True if the API could respond.
             </returns>
         </member>
-        <member name="M:LinkedDataProjectAPI.Services.Implementations.IEntitiesService.GetEntities(System.String[],System.String[],System.String[])">
-            <summary>
-            
-            </summary>
-            <param name="ids"></param>
-            <param name="languages"></param>
-            <param name="props"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LinkedDataProjectAPI.Services.Implementations.IEntitiesService.GetSingleEntity(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>

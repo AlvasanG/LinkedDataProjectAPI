@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +43,7 @@ namespace LinkedDataProjectAPI
                 var filePath = Path.Combine(System.AppContext.BaseDirectory, "LinkedDataProjectAPI.xml");
                 c.IncludeXmlComments(filePath);
             });
+            Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

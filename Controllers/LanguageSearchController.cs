@@ -1,12 +1,8 @@
 ﻿using LinkedDataProjectAPI.Controllers.DTOs;
-using LinkedDataProjectAPI.Infraestructure.Types;
 using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Controllers
 {

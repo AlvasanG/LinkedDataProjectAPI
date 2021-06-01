@@ -10,7 +10,7 @@ namespace LinkedDataProjectAPI.Controllers.DTOs
     {
         public T Result { get; set; }
         public bool Succeeded { get; set; }
-        public Error Error { get; set; }
+        public ErrorMessage Error { get; set; }
         public Warning Warning { get; set; }
     }
 }

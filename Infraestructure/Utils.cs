@@ -7,7 +7,7 @@ namespace LinkedDataProjectAPI.Infraestructure
 {
     public class Utils
     {
-        private static IDictionary<string, string> _supportedEntitiesParameters = new Dictionary<string, string>()
+        private static readonly IDictionary<string, string> _supportedEntitiesParameters = new Dictionary<string, string>()
         {
             {"info", "info"},
             {"sitelinks", "sitelinks"},
@@ -26,7 +26,7 @@ namespace LinkedDataProjectAPI.Infraestructure
             }
             foreach(var p in props)
             {
-                if (_supportedEntitiesParameters[p] == null)
+                if (!_supportedEntitiesParameters.ContainsKey(p))
                     return false;
             }
             return true;

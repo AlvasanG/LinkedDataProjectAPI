@@ -13,15 +13,5 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         {
             languageSearch = new Dictionary<string, string>();
         }
-
-        public LanguageSearchResult(string[] _)
-        {
-            languageSearch = new Dictionary<string, string>();
-        }
-
-        public LanguageSearchResult(IDictionary<string, string> languages)
-        {
-            this.languageSearch = languages;
-        }
     }
 }

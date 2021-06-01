@@ -9,16 +9,16 @@ namespace LinkedDataProjectAPI.Infraestructure.Types.DTOs
     {
         public Data data { get; set; }
         public Warning warnings { get; set; }
-        public Error errors { get; set; }
+        public ErrorMessage errors { get; set; }
 
         public SearchValuesDto()
         {
             data = new Data();
             warnings = new Warning();
-            errors = new Error();
+            errors = new ErrorMessage();
         }
 
-        public SearchValuesDto(Data data, Warning warnings, Error errors)
+        public SearchValuesDto(Data data, Warning warnings, ErrorMessage errors)
         {
             this.data = data;
             this.warnings = warnings;
