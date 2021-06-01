@@ -37,10 +37,10 @@ namespace LinkedDataProjectAPI.Services.Implementations
     public class EntitiesService : IEntitiesService
     {
         private const string OPERATION = "wbgetentities";
-        private readonly WikidataRepository _wikiRepo;
-        private readonly LanguageSearchService _langServ;
+        private readonly IWikidataRepository _wikiRepo;
+        private readonly ILanguageSearchService _langServ;
 
-        public EntitiesService(WikidataRepository wikidataRepository, LanguageSearchService langService)
+        public EntitiesService(IWikidataRepository wikidataRepository, ILanguageSearchService langService)
         {
             _wikiRepo = wikidataRepository;
             _langServ = langService;

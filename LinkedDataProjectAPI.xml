@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LinkedDataProjectAPI</name>
+    </assembly>
+    <members>
+        <member name="M:LinkedDataProjectAPI.Controllers.LanguageSearchController.GetSingleEntity(System.String)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Services.Implementations.IEntitiesService.GetEntities(System.String[],System.String[],System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="ids"></param>
+            <param name="languages"></param>
+            <param name="props"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Services.Implementations.IEntitiesService.GetSingleEntity(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

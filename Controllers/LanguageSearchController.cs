@@ -1,8 +1,11 @@
-﻿using LinkedDataProjectAPI.Services.Implementations;
+﻿using LinkedDataProjectAPI.Controllers.DTOs;
+using LinkedDataProjectAPI.Infraestructure.Types;
+using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Controllers
@@ -18,13 +21,28 @@ namespace LinkedDataProjectAPI.Controllers
             _langSvc = langSvc;
         }
 
+        /// <summary>
+        /// Search for language names in any script.
+        /// </summary>
+        /// <param name="lang"> String to look for languages.</param>
+        /// <returns> 
+        /// Result: Dictionary of strings containing:
+        ///     A key equal to the language code.
+        ///     A value equal to the name of the language.
+        /// Error: An error code on field "code" and extra information on field "info".
+        /// Warning: A warning description on field "main".
+        /// Succeeded: True if the API could respond.
+        /// </returns>
         [HttpGet]
         [Route("")]
-        public void GetSingleEntity([FromQuery] string lang)
+        [ProducesResponseType ((int) HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
+        public IActionResult GetSingleEntity([FromQuery] string lang)
         {
-            var result = _langSvc.GetLanguagesStartingWith(lang);
-            // construct an ok with result = result
-            // check how to return an Ok dto and define it within []
+            return Ok(new ResponseDto<IDictionary<string, string>>
+            {
+                Result = _langSvc.GetLanguagesStartingWith(lang),
+                Succeeded = true
+            });
         }
     }
 }

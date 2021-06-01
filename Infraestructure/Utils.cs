@@ -61,7 +61,8 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             foreach(var entry in secondDic)
             {
-                mainDic.Add(entry.Key, entry.Value);
+                if(!mainDic.ContainsKey(entry.Key))
+                    mainDic.Add(entry.Key, entry.Value);
             }
         }
     }

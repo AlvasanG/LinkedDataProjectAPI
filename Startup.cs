@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,7 +33,14 @@ namespace LinkedDataProjectAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinkedDataProjectAPI", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo 
+                    { 
+                        Title = "LinkedDataProjectAPI",
+                        Version = "v1" 
+                    });
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "LinkedDataProjectAPI.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 

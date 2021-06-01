@@ -1,9 +1,11 @@
 ﻿using LinkedDataProjectAPI.Controllers.DTOs;
+using LinkedDataProjectAPI.Infraestructure.Types;
 using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Controllers
@@ -21,20 +23,32 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/single")]
-        public void GetSingleEntity([FromQuery] string id)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<Data>))]
+        public IActionResult GetSingleEntity([FromQuery] string id)
         {
             var result = _entitySvc.GetSingleEntity(id);
-            // construct an ok with result = result
-            // check how to return an Ok dto and define it within []
+            return Ok(new ResponseDto<Data>
+            {
+                Result = result.data,
+                Error = result.errors,
+                Warning = result.warnings,
+                Succeeded = true
+            });
         }
 
         [HttpGet]
         [Route("/multiple")]
-        public void GetMultipleEntities([FromQuery] SearchEntityDto search)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<Data>))]
+        public IActionResult GetMultipleEntities([FromQuery] SearchEntityDto search)
         {
             var result = _entitySvc.GetEntities(search.ids, search.languages, search.props);
-            // construct an ok with result = result
-            // check how to return an Ok dto and define it within []
+            return Ok(new ResponseDto<Data>
+            {
+                Result = result.data,
+                Error = result.errors,
+                Warning = result.warnings,
+                Succeeded = true
+            });
         }
     }
 }
