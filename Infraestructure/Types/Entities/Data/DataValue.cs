@@ -1,19 +1,22 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Text;
 
 namespace LinkedDataProjectAPI.Infraestructure.Types
 {
     public class DataValue
     {
-        public JToken value { get; set; }
+        [JsonIgnore]
+        public IDictionary<string, object> value { get; set; }
         public string type { get; set; }
 
         public DataValue()
         {
-            value = JToken.Parse("");
             type = string.Empty;
         }
 
-        public DataValue(JToken value, string type)
+        public DataValue(IDictionary<string, object> value, string type)
         {
             this.value = value;
             this.type = type;

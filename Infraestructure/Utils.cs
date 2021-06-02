@@ -1,5 +1,9 @@
-﻿using System;
+﻿using LinkedDataProjectAPI.Infraestructure.Types;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -65,5 +69,21 @@ namespace LinkedDataProjectAPI.Infraestructure
                     mainDic.Add(entry.Key, entry.Value);
             }
         }
+
+        public static Data BuildDataFromJson(string stringData)
+        {
+            var data = JsonConvert.DeserializeObject<Data>(stringData);
+            dynamic parsed = JsonConvert.DeserializeObject<ExpandoObject>(stringData, new ExpandoObjectConverter());
+            foreach (dynamic entity in (IDictionary<string, dynamic>)parsed.entities)
+            {
+                var claims = entity.Value.claims;
+                foreach (dynamic claim in (IDictionary<string, dynamic>)claims.Value)
+                {
+                    var c = claim.key;
+                }
+            }
+            return data;
+        }
+
     }
 }
