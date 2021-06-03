@@ -10,6 +10,7 @@ namespace LinkedDataProjectAPI.Services
             // Add services here
             services.AddScoped<IEntitiesService, EntitiesService>();
             services.AddScoped<ILanguageSearchService, LanguageSearchService>();
+            services.AddScoped<IClaimsService, ClaimsService>();
 
             return services;
         }

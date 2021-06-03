@@ -65,7 +65,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
             try
             {
                 var data = JsonConvert.DeserializeObject<Data>(stringData);
-                Utils.SplitDataValues(ref data);
+                Utils.SplitDataValue(ref data);
                 var warnings = JsonConvert.DeserializeObject<WarningEntities>(stringData);
                 var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
                 return new SearchValuesDto(data, warnings, errors);

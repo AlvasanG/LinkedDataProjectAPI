@@ -64,7 +64,7 @@ namespace LinkedDataProjectAPI.Infraestructure
             }
         }
 
-        public static Data SplitDataValues(ref Data data)
+        public static void SplitDataValue(ref Data data)
         {
             foreach (var entity in data.entities)
             {
@@ -81,7 +81,19 @@ namespace LinkedDataProjectAPI.Infraestructure
                     }
                 }
             }
-            return data;
+        }
+
+        public static void SplitDataValue(ref IEnumerable<Claim> claims)
+        {
+            foreach (var claim in claims)
+            {
+                var dataValue = claim.mainSnak.dataValue;
+                dataValue.values = new Dictionary<string, string>();
+                foreach (var token in dataValue.value)
+                {
+                    dataValue.values.Add(token.Path.ToString(), token.First.ToString());
+                }
+            }
         }
 
     }
