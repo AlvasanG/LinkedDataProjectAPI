@@ -9,10 +9,10 @@
 
         public Claim()
         {
-            id = string.Empty;
-            rank = string.Empty;
-            type = string.Empty;
-            mainSnak = new MainSnak();
+            this.id = string.Empty;
+            this.rank = string.Empty;
+            this.type = string.Empty;
+            this.mainSnak = new MainSnak();
         }
 
         public Claim(string id, string rank, string type, MainSnak mainSnak)

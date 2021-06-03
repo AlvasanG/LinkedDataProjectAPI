@@ -7,8 +7,8 @@
 
         public Language()
         {
-            language = string.Empty;
-            value = string.Empty;
+            this.language = string.Empty;
+            this.value = string.Empty;
         }
 
         public Language(string language, string value)

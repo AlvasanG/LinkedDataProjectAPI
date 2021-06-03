@@ -19,17 +19,17 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public Entity()
         {
-            title = string.Empty;
-            id = string.Empty;
-            ns = 0;
-            lastRevId = 0;
-            modified = new DateTime();
-            type = string.Empty;
-            labes = new Dictionary<string, Language>();
-            aliases = new Dictionary<string, IList<Language>>();
-            descriptions = new Dictionary<string, Language>();
-            claims = new Dictionary<string, IList<Claim>>();
-            siteLinks = new Dictionary<string, SiteLink>();
+            this.title = string.Empty;
+            this.id = string.Empty;
+            this.ns = 0;
+            this.lastRevId = 0;
+            this.modified = new DateTime();
+            this.type = string.Empty;
+            this.labes = new Dictionary<string, Language>();
+            this.aliases = new Dictionary<string, IList<Language>>();
+            this.descriptions = new Dictionary<string, Language>();
+            this.claims = new Dictionary<string, IList<Claim>>();
+            this.siteLinks = new Dictionary<string, SiteLink>();
         }
 
         public Entity(string title, string id, int ns, int lastRevId,

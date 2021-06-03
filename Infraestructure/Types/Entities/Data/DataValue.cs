@@ -8,17 +8,19 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
     public class DataValue
     {
         [JsonIgnore]
-        public IDictionary<string, object> value { get; set; }
+        public IDictionary<string, string> values { get; set; }
+        public JToken value { get; set; }
         public string type { get; set; }
 
         public DataValue()
         {
-            type = string.Empty;
+            this.type = string.Empty;
+            this.values = new Dictionary<string, string>();
         }
 
-        public DataValue(IDictionary<string, object> value, string type)
+        public DataValue(IDictionary<string, string> value, string type)
         {
-            this.value = value;
+            this.values = value;
             this.type = type;
         }
     }

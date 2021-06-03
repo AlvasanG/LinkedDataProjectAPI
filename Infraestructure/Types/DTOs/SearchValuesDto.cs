@@ -10,9 +10,9 @@ namespace LinkedDataProjectAPI.Infraestructure.Types.DTOs
 
         public SearchValuesDto()
         {
-            data = new Data();
-            warnings = new WarningEntities();
-            errors = new ErrorMessage();
+            this.data = new Data();
+            this.warnings = new WarningEntities();
+            this.errors = new ErrorMessage();
         }
 
         public SearchValuesDto(Data data, WarningEntities warnings, ErrorMessage errors)

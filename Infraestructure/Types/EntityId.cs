@@ -7,8 +7,8 @@
 
         public EntityId()
         {
-            entityType = string.Empty;
-            numericId = 0;
+            this.entityType = string.Empty;
+            this.numericId = 0;
         }
 
         public EntityId(string entity, int id)

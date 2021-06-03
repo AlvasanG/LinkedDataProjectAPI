@@ -9,10 +9,10 @@
 
         public SearchResult()
         {
-            id = string.Empty;
-            url = string.Empty;
-            description = string.Empty;
-            label = string.Empty;
+            this.id = string.Empty;
+            this.url = string.Empty;
+            this.description = string.Empty;
+            this.label = string.Empty;
         }
 
         public SearchResult(string id, string url, string description, string label)

@@ -15,6 +15,7 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         {
             this.name = string.Empty;
             this.parameters = new List<string>();
+            this.html = new HtmlField();
         }
 
     }

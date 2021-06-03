@@ -70,16 +70,21 @@ namespace LinkedDataProjectAPI.Infraestructure
             }
         }
 
-        public static Data BuildDataFromJson(string stringData)
+        public static Data SplitDataValues(ref Data data)
         {
-            var data = JsonConvert.DeserializeObject<Data>(stringData);
-            dynamic parsed = JsonConvert.DeserializeObject<ExpandoObject>(stringData, new ExpandoObjectConverter());
-            foreach (dynamic entity in (IDictionary<string, dynamic>)parsed.entities)
+            foreach (var entity in data.entities)
             {
-                var claims = entity.Value.claims;
-                foreach (dynamic claim in (IDictionary<string, dynamic>)claims.Value)
+                foreach (var claim in entity.Value.claims)
                 {
-                    var c = claim.key;
+                    foreach (var c in claim.Value)
+                    {
+                        var dataValue = c.mainSnak.dataValue;
+                        dataValue.values = new Dictionary<string, string>();
+                        foreach (var token in dataValue.value)
+                        {
+                            dataValue.values.Add(token.Path.ToString(), token.First.ToString());
+                        }
+                    }
                 }
             }
             return data;

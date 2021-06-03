@@ -60,17 +60,16 @@ namespace LinkedDataProjectAPI.Services.Implementations
             }
             if(props != null)
             {
-                //if (!Utils.CheckCorrectParametersGetEntities(props))
-                //{
-                //    throw new ArgumentException("Some parameters (props) are not supported for this operation");
-                //}
-                qs += Utils.ConcatenateToUrl("props", props);
+                if (Utils.CheckCorrectParametersGetEntities(props))
+                {
+                    qs += Utils.ConcatenateToUrl("props", props);
+                }
             }
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             try
             {
-                //var data = Utils.BuildDataFromJson(stringData);
                 var data = JsonConvert.DeserializeObject<Data>(stringData);
+                Utils.SplitDataValues(ref data);
                 var warnings = JsonConvert.DeserializeObject<WarningEntities>(stringData);
                 var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
                 return new SearchValuesDto(data, warnings, errors);
@@ -81,5 +80,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
                 return new SearchValuesDto();
             }
         }
+
+
     }
 }

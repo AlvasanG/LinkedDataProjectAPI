@@ -10,5 +10,10 @@ namespace LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning
     {
         [JsonProperty("*")]
         public string star { get; set; }
+
+        public WarningEntities()
+        {
+            this.star = string.Empty;
+        }
     }
 }

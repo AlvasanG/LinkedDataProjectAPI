@@ -11,7 +11,7 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public Warning()
         {
-            main = string.Empty;
+            this.main = string.Empty;
         }
 
         public Warning(string main)

@@ -8,9 +8,9 @@
 
         public MainSnak()
         {
-            property = string.Empty;
-            snakType = string.Empty;
-            dataValue = new DataValue();
+            this.property = string.Empty;
+            this.snakType = string.Empty;
+            this.dataValue = new DataValue();
         }
 
         public MainSnak(string property, string snakType, DataValue dataValue)

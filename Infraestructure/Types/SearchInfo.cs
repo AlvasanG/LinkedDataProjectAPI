@@ -6,7 +6,7 @@
 
         public SearchInfo()
         {
-            search = string.Empty;
+            this.search = string.Empty;
         }
 
         public SearchInfo(string search)

@@ -7,8 +7,8 @@
 
         public ErrorMessage()
         {
-            error = new Error();
-            servedBy = string.Empty;
+            this.error = new Error();
+            this.servedBy = string.Empty;
         }
     }
 }

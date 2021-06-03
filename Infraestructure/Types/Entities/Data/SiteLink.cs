@@ -11,9 +11,9 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public SiteLink()
         {
-            site = string.Empty;
-            title = string.Empty;
-            badges = new ArrayList();
+            this.site = string.Empty;
+            this.title = string.Empty;
+            this.badges = new ArrayList();
         }
 
         public SiteLink(string site, string title, IList badges)

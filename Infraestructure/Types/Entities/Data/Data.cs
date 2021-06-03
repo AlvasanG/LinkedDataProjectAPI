@@ -10,8 +10,8 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public Data()
         {
-            entities = new Dictionary<string, Entity>();
-            success = false;
+            this.entities = new Dictionary<string, Entity>();
+            this.success = false;
         }
 
         public Data(IDictionary<string, Entity> entities, int success)

@@ -10,5 +10,10 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
     {
         [JsonProperty("*")]
         public string star { get; set; }
+
+        public HtmlField()
+        {
+            this.star = string.Empty;
+        }
     }
 }

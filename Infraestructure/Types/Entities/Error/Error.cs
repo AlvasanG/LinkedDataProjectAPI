@@ -13,12 +13,12 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         [JsonProperty("*")]
         public string star {get; set; }
 
-
         public Error()
         {
-            code = string.Empty;
-            info = string.Empty;
-            star = string.Empty;
+            this.code = string.Empty;
+            this.info = string.Empty;
+            this.star = string.Empty;
+            this.messages = new List<Message>();
         }
     }
 }

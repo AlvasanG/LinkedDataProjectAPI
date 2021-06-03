@@ -10,9 +10,9 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
 
         public Search()
         {
-            searchInfo = new SearchInfo();
-            search = new SearchResult();
-            success = false;
+            this.searchInfo = new SearchInfo();
+            this.search = new SearchResult();
+            this.success = false;
         }
 
         public Search(SearchInfo searchInfo, SearchResult searchResult, int success)
