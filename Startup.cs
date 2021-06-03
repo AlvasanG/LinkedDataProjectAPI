@@ -1,3 +1,4 @@
+using LinkedDataProjectAPI.Repository;
 using LinkedDataProjectAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,8 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,12 +29,21 @@ namespace LinkedDataProjectAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepositories();
             services.AddServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinkedDataProjectAPI", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo 
+                    { 
+                        Title = "LinkedDataProjectAPI",
+                        Version = "v1" 
+                    });
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "LinkedDataProjectAPI.xml");
+                c.IncludeXmlComments(filePath);
             });
+            Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
