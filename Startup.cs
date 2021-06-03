@@ -2,18 +2,12 @@ using LinkedDataProjectAPI.Repository;
 using LinkedDataProjectAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI
 {
@@ -35,10 +29,10 @@ namespace LinkedDataProjectAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
-                    new OpenApiInfo 
-                    { 
+                    new OpenApiInfo
+                    {
                         Title = "LinkedDataProjectAPI",
-                        Version = "v1" 
+                        Version = "v1"
                     });
                 var filePath = Path.Combine(System.AppContext.BaseDirectory, "LinkedDataProjectAPI.xml");
                 c.IncludeXmlComments(filePath);

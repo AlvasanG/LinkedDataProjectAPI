@@ -6,10 +6,6 @@ using LinkedDataProjectAPI.Repository;
 using Newtonsoft.Json;
 using Serilog;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Dynamic;
-using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
 
 namespace LinkedDataProjectAPI.Services.Implementations
 {
@@ -36,11 +32,11 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public SearchValuesDto GetSingleEntity(string id)
         {
-            if(id == null || id.Trim() == "")
+            if (id == null || id.Trim() == "")
             {
                 return new SearchValuesDto();
             }
-            if(id.First() != 'Q' && id.First() != 'P' && id.First() != 'q' && id.First() != 'p')
+            if (id.First() != 'Q' && id.First() != 'P' && id.First() != 'q' && id.First() != 'p')
             {
                 return new SearchValuesDto();
             }
@@ -49,7 +45,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public SearchValuesDto GetEntities(string[] ids, string[] languages = null, string[] props = null)
         {
-            if(ids == null || ids.Length < 1)
+            if (ids == null || ids.Length < 1)
             {
                 return new SearchValuesDto();
             }
@@ -58,7 +54,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
             {
                 qs += Utils.ConcatenateToUrl("languages", languages);
             }
-            if(props != null)
+            if (props != null)
             {
                 if (Utils.CheckCorrectParametersGetEntities(props))
                 {

@@ -1,11 +1,5 @@
 ﻿using LinkedDataProjectAPI.Infraestructure.Types;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Infraestructure
 {
@@ -24,11 +18,11 @@ namespace LinkedDataProjectAPI.Infraestructure
 
         public static bool CheckCorrectParametersGetEntities(string[] props)
         {
-            if(props == null)
+            if (props == null)
             {
                 return true;
             }
-            foreach(var p in props)
+            foreach (var p in props)
             {
                 if (!_supportedEntitiesParameters.ContainsKey(p))
                     return false;
@@ -63,9 +57,9 @@ namespace LinkedDataProjectAPI.Infraestructure
 
         public static void Merge<V, K>(ref IDictionary<V, K> mainDic, IDictionary<V, K> secondDic)
         {
-            foreach(var entry in secondDic)
+            foreach (var entry in secondDic)
             {
-                if(!mainDic.ContainsKey(entry.Key))
+                if (!mainDic.ContainsKey(entry.Key))
                     mainDic.Add(entry.Key, entry.Value);
             }
         }

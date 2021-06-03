@@ -24,7 +24,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public IDictionary<string, string> GetLanguagesStartingWith(string lang)
         {
-            if(lang == null || lang.Trim() == "")
+            if (lang == null || lang.Trim() == "")
             {
                 return new Dictionary<string, string>();
             }
