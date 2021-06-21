@@ -1,4 +1,6 @@
 ﻿using LinkedDataProjectAPI.Controllers.DTOs;
+using LinkedDataProjectAPI.Infraestructure.Types;
+using LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning;
 using LinkedDataProjectAPI.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -18,11 +20,11 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/single")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto))]
-        public IActionResult GetSingleEntity([FromQuery] string id)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto<Data>))]
+        public IActionResult GetSingleEntity([FromQuery] SearchSingleEntityDto search)
         {
-            var result = _entitySvc.GetSingleEntity(id);
-            return Ok(new ResponseEntitiesDto
+            var result = _entitySvc.GetSingleEntity(search.id, search.languages, search.props);
+            return Ok(new ResponseEntitiesDto<Data>
             {
                 Result = result.data,
                 Error = result.errors,
@@ -33,11 +35,11 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/multiple")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto<Data>))]
         public IActionResult GetMultipleEntities([FromQuery] SearchEntityDto search)
         {
             var result = _entitySvc.GetEntities(search.ids, search.languages, search.props);
-            return Ok(new ResponseEntitiesDto
+            return Ok(new ResponseEntitiesDto<Data>
             {
                 Result = result.data,
                 Error = result.errors,

@@ -5,6 +5,7 @@ using LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning;
 using LinkedDataProjectAPI.Repository;
 using Newtonsoft.Json;
 using Serilog;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LinkedDataProjectAPI.Services.Implementations
@@ -13,9 +14,9 @@ namespace LinkedDataProjectAPI.Services.Implementations
     public interface IEntitiesService
     {
 
-        public SearchValuesDto GetEntities(string[] ids, string[] languages, string[] props);
+        public EntitySearchValuesDto GetEntities(string[] ids, string[] languages, string[] props);
 
-        public SearchValuesDto GetSingleEntity(string id);
+        public EntitySearchValuesDto GetSingleEntity(string id, string[] languages = null, string[] props = null);
 
 
     }
@@ -30,24 +31,24 @@ namespace LinkedDataProjectAPI.Services.Implementations
             _wikiRepo = wikidataRepository;
         }
 
-        public SearchValuesDto GetSingleEntity(string id)
+        public EntitySearchValuesDto GetSingleEntity(string id, string[] languages = null, string[] props = null)
         {
             if (id == null || id.Trim() == "")
             {
-                return new SearchValuesDto();
+                return new EntitySearchValuesDto();
             }
             if (id.First() != 'Q' && id.First() != 'P' && id.First() != 'q' && id.First() != 'p')
             {
-                return new SearchValuesDto();
+                return new EntitySearchValuesDto();
             }
-            return GetEntities(new string[] { id });
+            return GetEntities(new string[] { id }, languages, props);
         }
 
-        public SearchValuesDto GetEntities(string[] ids, string[] languages = null, string[] props = null)
+        public EntitySearchValuesDto GetEntities(string[] ids, string[] languages = null, string[] props = null)
         {
             if (ids == null || ids.Length < 1)
             {
-                return new SearchValuesDto();
+                return new EntitySearchValuesDto();
             }
             string qs = Utils.ConcatenateToUrl("ids", ids);
             if (languages != null)
@@ -56,7 +57,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
             }
             if (props != null)
             {
-                if (Utils.CheckCorrectParametersGetEntities(props))
+                if (Utils.CheckCorrectParameters(props, Utils._supportedEntitiesParameters))
                 {
                     qs += Utils.ConcatenateToUrl("props", props);
                 }
@@ -68,12 +69,12 @@ namespace LinkedDataProjectAPI.Services.Implementations
                 Utils.SplitDataValue(ref data);
                 var warnings = JsonConvert.DeserializeObject<WarningEntities>(stringData);
                 var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
-                return new SearchValuesDto(data, warnings, errors);
+                return new EntitySearchValuesDto(data, warnings, errors);
             }
             catch (JsonException)
             {
                 Log.Error("Something went wrong parsing the query response.");
-                return new SearchValuesDto();
+                return new EntitySearchValuesDto();
             }
         }
 
