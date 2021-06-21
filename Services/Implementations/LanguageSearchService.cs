@@ -8,7 +8,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
 {
     public interface ILanguageSearchService
     {
-        public IDictionary<string, string> GetLanguagesStartingWith(string lang);
+        public IDictionary<string, string> GetLanguagesStartingWith(string lang, int typos);
 
     }
 
@@ -22,13 +22,14 @@ namespace LinkedDataProjectAPI.Services.Implementations
             _wikiRepo = wikidataRepository;
         }
 
-        public IDictionary<string, string> GetLanguagesStartingWith(string lang)
+        public IDictionary<string, string> GetLanguagesStartingWith(string lang, int typos)
         {
             if (lang == null || lang.Trim() == "")
             {
                 return new Dictionary<string, string>();
             }
-            string qs = Utils.ConcatenateToUrl("search", new string[] { lang });
+            string qs = Utils.ConcatenateToUrl("search", lang);
+            qs += Utils.ConcatenateToUrl("typos", typos.ToString());
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             if (stringData.Split(':')[1] == "[]}")
             {
