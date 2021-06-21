@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace LinkedDataProjectAPI.Infraestructure.Types
+namespace LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning
 {
-    public class HtmlField
+    public class Main
     {
         [JsonProperty("*")]
         public string star { get; set; }
 
-        public HtmlField()
+        public Main()
         {
             this.star = string.Empty;
         }

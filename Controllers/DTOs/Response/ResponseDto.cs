@@ -1,4 +1,5 @@
 ﻿using LinkedDataProjectAPI.Infraestructure.Types;
+using LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning;
 
 namespace LinkedDataProjectAPI.Controllers.DTOs
 {
@@ -7,6 +8,6 @@ namespace LinkedDataProjectAPI.Controllers.DTOs
         public T Result { get; set; }
         public bool Succeeded { get; set; }
         public ErrorMessage Error { get; set; }
-        public Warning Warning { get; set; }
+        public Warnings Warning { get; set; }
     }
 }

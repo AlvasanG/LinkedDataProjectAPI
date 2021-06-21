@@ -36,24 +36,24 @@ namespace LinkedDataProjectAPI.Repository
             }
             catch (Exception e)
             {
-                if(e is SecurityException)
+                if (e is SecurityException)
                 {
                     Log.Error("There was a problem creating a web request for your URI." +
                         "Check your priviledges.", e);
                 }
-                if(e is ArgumentNullException || e is ArgumentException)
+                if (e is ArgumentNullException || e is ArgumentException)
                 {
                     Log.Error("An argument does not fulfill the requirements.", e);
                 }
-                if(e is NotImplementedException)
+                if (e is NotImplementedException)
                 {
                     Log.Error("The method is not being defined on a subclass.", e);
                 }
-                if(e is NotSupportedException)
+                if (e is NotSupportedException)
                 {
                     Log.Error("Operation is not supported.", e);
                 }
-                if(e is OutOfMemoryException || e is IOException)
+                if (e is OutOfMemoryException || e is IOException)
                 {
                     Log.Error("There was a problem reading the respone.", e);
                 }
