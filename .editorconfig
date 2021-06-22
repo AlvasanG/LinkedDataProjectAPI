@@ -2,3 +2,6 @@
 
 # CS1591: Falta el comentario XML para el tipo o miembro visible públicamente
 dotnet_diagnostic.CS1591.severity = none
+
+# IDE0051: Quitar miembros privados no utilizados
+dotnet_diagnostic.IDE0051.severity = silent

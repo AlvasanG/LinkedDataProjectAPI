@@ -37,10 +37,6 @@ namespace LinkedDataProjectAPI.Services.Implementations
             {
                 return new SearchValuesDto<Data>();
             }
-            if (id.First() != 'Q' && id.First() != 'P' && id.First() != 'q' && id.First() != 'p')
-            {
-                return new SearchValuesDto<Data>();
-            }
             return GetEntities(new string[] { id }, languages, props);
         }
 
@@ -57,10 +53,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
             }
             if (props != null)
             {
-                if (Utils.CheckCorrectParameters(props, Utils._supportedEntitiesParameters))
-                {
-                    qs += Utils.ConcatenateToUrl("props", props);
-                }
+                qs += Utils.ConcatenateToUrl("props", props);
             }
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             try
