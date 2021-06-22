@@ -1,6 +1,9 @@
 ﻿using LinkedDataProjectAPI.Infraestructure.Types;
 using LinkedDataProjectAPI.Infraestructure.Types.Entities.Data;
+using Serilog;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace LinkedDataProjectAPI.Infraestructure
 {
@@ -86,20 +89,61 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             foreach (var entity in data.entities)
             {
-                foreach (var claim in entity.Value.claims)
+                if(entity.Value.type == "property")
                 {
-                    foreach (var c in claim.Value)
+                    continue;
+                }
+                foreach (var claims in entity.Value.claims)
+                {
+                    foreach (var claim in claims.Value)
                     {
-                        var dataValue = c.mainSnak.dataValue;
-                        dataValue.values = new Dictionary<string, string>();
-                        foreach (var token in dataValue.value)
+                        // Values en mainSnak
+                        var dataValue = claim.mainSnak.dataValue;
+                        if (dataValue.value != null)
                         {
-                            dataValue.values.Add(token.Path.ToString(), token.First.ToString());
+                            dataValue.values = UnwrapDataValue(dataValue);
                         }
+
+                        // Values en references
+                        if (claim.references != null && claim.references.Count > 0)
+                        {
+                            foreach(var token in claim.references)
+                            {
+                                foreach(var snak in token.snaks)
+                                {
+                                    foreach(var value in snak.Value)
+                                    {
+                                        dataValue = value.dataValue;
+                                        if (dataValue.value != null)
+                                        {
+                                            dataValue.values = UnwrapDataValue(dataValue);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Values en qualifiers
+                        if(claim.qualifiers != null && claim.qualifiers.Count > 0)
+                        {
+                            foreach (var token in claim.qualifiers)
+                            {
+                                foreach (var snak in token.Value)
+                                {
+                                    dataValue = snak.dataValue;
+                                    if(dataValue.value != null)
+                                    {
+                                        dataValue.values = UnwrapDataValue(dataValue);
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
         }
+
 
         public static void SplitDataValue(ref ClaimList claims)
         {
@@ -108,13 +152,18 @@ namespace LinkedDataProjectAPI.Infraestructure
                 foreach(var claim in c)
                 {
                     var dataValue = claim.mainSnak.dataValue;
-                    dataValue.values = new Dictionary<string, string>();
-                    foreach (var token in dataValue.value)
-                    {
-                        dataValue.values.Add(token.Path.ToString(), token.First.ToString());
-                    }
+                    dataValue.values = UnwrapDataValue(dataValue);
                 }
             }
+        }
+        private static Dictionary<string, string> UnwrapDataValue(DataValue dataValue)
+        {
+            var output = new Dictionary<string, string>();
+            foreach(var token in dataValue.value)
+            {
+                output.Add(token.Path.ToString(), token.First.ToString());
+            }
+            return output;
         }
 
     }

@@ -30,11 +30,11 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaims (string entity = null, string claim = null, string property = null, string rank = null, string props = null)
         {
-            if (entity != null && entity.Trim() != "")
+            if (entity != null)
             {
                 return GetClaimsForId("entity", entity, property, rank, props);
             }
-            else if (claim != null && claim.Trim() != "")
+            else if (claim != null)
             {
                 return GetClaimsForId("claim", claim, property, rank, props);
             }
@@ -51,17 +51,11 @@ namespace LinkedDataProjectAPI.Services.Implementations
             }
             if (rank != null)
             {
-                if(Utils.CheckCorrectParameters(new string[] { rank }, Utils._supportedClaimsRanks))
-                {
-                    qs += Utils.ConcatenateToUrl("rank", rank);
-                }
+                qs += Utils.ConcatenateToUrl("rank", rank);
             }
             if(props != null)
             {
-                if (Utils.CheckCorrectParameters(new string[] { props }, Utils._supportedClaimsProps))
-                {
-                    qs += Utils.ConcatenateToUrl("props", props);
-                }
+                qs += Utils.ConcatenateToUrl("props", props);
             }
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             try
