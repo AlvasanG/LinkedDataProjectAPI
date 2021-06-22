@@ -35,9 +35,12 @@ namespace LinkedDataProjectAPI.Controllers
         [ProducesResponseType ((int) HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
         public IActionResult GetSingleEntity([FromQuery] string lang, [FromQuery] int typos = 1)
         {
+            var result = _langSvc.GetLanguagesStartingWith(lang, typos);
             return Ok(new ResponseDto<IDictionary<string, string>>
             {
-                Result = _langSvc.GetLanguagesStartingWith(lang, typos),
+                Result = result.result,
+                Error = result.errors,
+                Warning = result.warnings,
                 Succeeded = true
             });
         }

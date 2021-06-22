@@ -18,6 +18,8 @@ namespace LinkedDataProjectAPI.Controllers
             _searchSvc = searchEntitiesService;
         }
 
+        [HttpGet]
+        [Route("/")]
         public IActionResult GetSearchEntities([FromQuery] string search, [FromQuery] string language, [FromQuery] bool strict, [FromQuery] string type = "item",
             [FromQuery] int limit = 7, [FromQuery] int continueFrom = 0, [FromQuery] string props = "url")
         {

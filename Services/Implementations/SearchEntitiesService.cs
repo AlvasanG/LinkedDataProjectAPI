@@ -24,6 +24,10 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public SearchResult GetSearchEntities(string search, string language, bool strict, string type, int limit, int continueFrom, string props)
         {
+            if(search != null)
+            {
+
+            }
             throw new NotImplementedException();
         }
     }

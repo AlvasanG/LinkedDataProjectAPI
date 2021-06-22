@@ -4,11 +4,12 @@
         <name>LinkedDataProjectAPI</name>
     </assembly>
     <members>
-        <member name="M:LinkedDataProjectAPI.Controllers.LanguageSearchController.GetSingleEntity(System.String)">
+        <member name="M:LinkedDataProjectAPI.Controllers.LanguageSearchController.GetSingleEntity(System.String,System.Int32)">
             <summary>
             Search for language names in any script.
             </summary>
             <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
             <returns> 
             Result: Dictionary of strings containing:
                 A key equal to the language code.
