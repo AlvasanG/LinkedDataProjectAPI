@@ -47,14 +47,8 @@ namespace LinkedDataProjectAPI.Services.Implementations
                 return new SearchValuesDto<Data>();
             }
             string qs = Utils.ConcatenateToUrl("ids", ids);
-            if (languages != null)
-            {
-                qs += Utils.ConcatenateToUrl("languages", languages);
-            }
-            if (props != null)
-            {
-                qs += Utils.ConcatenateToUrl("props", props);
-            }
+            qs += Utils.ConcatenateToUrl("languages", languages);
+            qs += Utils.ConcatenateToUrl("props", props);
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             try
             {

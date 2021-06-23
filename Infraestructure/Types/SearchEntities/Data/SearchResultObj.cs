@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LinkedDataProjectAPI.Infraestructure.Types.SearchEntities.Data
 {
-    public class SearchResult
+    public class SearchResultObj
     {
         public SearchInfo searchInfo { get; set; }
         public IList<Search> search { get; set; }
@@ -12,7 +12,7 @@ namespace LinkedDataProjectAPI.Infraestructure.Types.SearchEntities.Data
         public int searchContinue { get; set; }
         public bool success { get; set; }
 
-        public SearchResult()
+        public SearchResultObj()
         {
             this.searchInfo = new SearchInfo();
             this.search = new List<Search>();
@@ -20,7 +20,7 @@ namespace LinkedDataProjectAPI.Infraestructure.Types.SearchEntities.Data
             this.success = false;
         }
 
-        public SearchResult(SearchInfo searchInfo, IList<Search> search, int searchContinue, int success)
+        public SearchResultObj(SearchInfo searchInfo, IList<Search> search, int searchContinue, int success)
         {
             this.searchInfo = searchInfo;
             this.search = search;

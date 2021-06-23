@@ -26,10 +26,6 @@ namespace LinkedDataProjectAPI.Services.Implementations
 
         public SearchValuesDto<IDictionary<string, string>> GetLanguagesStartingWith(string lang, int typos)
         {
-            if (lang == null)
-            {
-                lang = "";
-            }
             string qs = Utils.ConcatenateToUrl("search", lang);
             qs += Utils.ConcatenateToUrl("typos", typos.ToString());
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);

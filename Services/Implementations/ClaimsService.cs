@@ -45,18 +45,9 @@ namespace LinkedDataProjectAPI.Services.Implementations
         private SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaimsForId (string propName, string id, string property = null, string rank = null, string props = null)
         {
             string qs = Utils.ConcatenateToUrl(propName, id);
-            if (property != null && (property.First() == 'P' || property.First() == 'p'))
-            {
-                qs += Utils.ConcatenateToUrl("property", property);
-            }
-            if (rank != null)
-            {
-                qs += Utils.ConcatenateToUrl("rank", rank);
-            }
-            if(props != null)
-            {
-                qs += Utils.ConcatenateToUrl("props", props);
-            }
+            qs += Utils.ConcatenateToUrl("property", property);
+            qs += Utils.ConcatenateToUrl("rank", rank);
+            qs += Utils.ConcatenateToUrl("props", props);
             var stringData = _wikiRepo.PerformAction(OPERATION, qs);
             try
             {
