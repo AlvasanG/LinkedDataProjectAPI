@@ -102,7 +102,6 @@ namespace LinkedDataProjectAPI.Infraestructure
                         if (dataValue.values != null)
                         {
                             dataValue.value = UnwrapDataValue(dataValue);
-                            dataValue.values = null;
                         }
 
                         // Values en references
@@ -118,7 +117,6 @@ namespace LinkedDataProjectAPI.Infraestructure
                                         if (dataValue.values != null)
                                         {
                                             dataValue.value = UnwrapDataValue(dataValue);
-                                            dataValue.values = null;
                                         }
                                     }
                                 }
@@ -136,7 +134,6 @@ namespace LinkedDataProjectAPI.Infraestructure
                                     if(dataValue.values != null)
                                     {
                                         dataValue.value = UnwrapDataValue(dataValue);
-                                        dataValue.values = null;
                                     }
                                 }
                             }
@@ -152,10 +149,50 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             foreach (var c in claims.claims.Values)
             {
-                foreach(var claim in c)
+                foreach (var claim in c)
                 {
+                    // Values en mainSnak
                     var dataValue = claim.mainSnak.dataValue;
-                    dataValue.value = UnwrapDataValue(dataValue);
+                    if (dataValue.values != null)
+                    {
+                        dataValue.value = UnwrapDataValue(dataValue);
+                    }
+
+                    // Values en references
+                    if (claim.references != null && claim.references.Count > 0)
+                    {
+                        foreach (var token in claim.references)
+                        {
+                            foreach (var snak in token.snaks)
+                            {
+                                foreach (var value in snak.Value)
+                                {
+                                    dataValue = value.dataValue;
+                                    if (dataValue.values != null)
+                                    {
+                                        dataValue.value = UnwrapDataValue(dataValue);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Values en qualifiers
+                    if (claim.qualifiers != null && claim.qualifiers.Count > 0)
+                    {
+                        foreach (var token in claim.qualifiers)
+                        {
+                            foreach (var snak in token.Value)
+                            {
+                                dataValue = snak.dataValue;
+                                if (dataValue.values != null)
+                                {
+                                    dataValue.value = UnwrapDataValue(dataValue);
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -173,6 +210,7 @@ namespace LinkedDataProjectAPI.Infraestructure
             {
                 output.Add("value", dataValue.values.ToString());
             }
+            dataValue.values = null;
             return output;
         }
 
