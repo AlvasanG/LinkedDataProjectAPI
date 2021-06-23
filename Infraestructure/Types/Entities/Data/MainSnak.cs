@@ -2,11 +2,11 @@
 {
     public class MainSnak
     {
-        public string property { get; set; }
         public string snakType { get; set; }
+        public string property { get; set; }
+        public string hash { get; set; }
         public DataValue dataValue { get; set; }
         public string dataType { get; set; }
-        public string hash { get; set; }
 
         public MainSnak()
         {

@@ -99,9 +99,10 @@ namespace LinkedDataProjectAPI.Infraestructure
                     {
                         // Values en mainSnak
                         var dataValue = claim.mainSnak.dataValue;
-                        if (dataValue.value != null)
+                        if (dataValue.values != null)
                         {
-                            dataValue.values = UnwrapDataValue(dataValue);
+                            dataValue.value = UnwrapDataValue(dataValue);
+                            dataValue.values = null;
                         }
 
                         // Values en references
@@ -114,9 +115,10 @@ namespace LinkedDataProjectAPI.Infraestructure
                                     foreach(var value in snak.Value)
                                     {
                                         dataValue = value.dataValue;
-                                        if (dataValue.value != null)
+                                        if (dataValue.values != null)
                                         {
-                                            dataValue.values = UnwrapDataValue(dataValue);
+                                            dataValue.value = UnwrapDataValue(dataValue);
+                                            dataValue.values = null;
                                         }
                                     }
                                 }
@@ -131,9 +133,10 @@ namespace LinkedDataProjectAPI.Infraestructure
                                 foreach (var snak in token.Value)
                                 {
                                     dataValue = snak.dataValue;
-                                    if(dataValue.value != null)
+                                    if(dataValue.values != null)
                                     {
-                                        dataValue.values = UnwrapDataValue(dataValue);
+                                        dataValue.value = UnwrapDataValue(dataValue);
+                                        dataValue.values = null;
                                     }
                                 }
                             }
@@ -152,16 +155,23 @@ namespace LinkedDataProjectAPI.Infraestructure
                 foreach(var claim in c)
                 {
                     var dataValue = claim.mainSnak.dataValue;
-                    dataValue.values = UnwrapDataValue(dataValue);
+                    dataValue.value = UnwrapDataValue(dataValue);
                 }
             }
         }
         private static Dictionary<string, string> UnwrapDataValue(DataValue dataValue)
         {
             var output = new Dictionary<string, string>();
-            foreach(var token in dataValue.value)
+            if(dataValue.values.HasValues)
             {
-                output.Add(token.Path.ToString(), token.First.ToString());
+                foreach(var token in dataValue.values)
+                {
+                    output.Add(token.Path.ToString(), token.First.ToString());
+                }
+            }
+            else
+            {
+                output.Add("value", dataValue.values.ToString());
             }
             return output;
         }

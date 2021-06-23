@@ -8,12 +8,12 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
     {
         public MainSnak mainSnak { get; set; }
         public string type { get; set; }
-        public string id { get; set; }
-        public string rank { get; set; }
-        public IList<Reference> references { get; set; }
         public IDictionary<string, IList<MainSnak>> qualifiers { get; set; }
         [JsonProperty("qualifiers-order")]
         public IList<string> qualifierOrder { get; set; }
+        public string id { get; set; }
+        public string rank { get; set; }
+        public IList<Reference> references { get; set; }
 
         public Claim()
         {
