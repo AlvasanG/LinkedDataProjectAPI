@@ -32,6 +32,18 @@ namespace LinkedDataProjectAPI.Infraestructure
             {"references"}
         };
 
+        private static string _url = "https://www.wikidata.org/w/api.php?format=json&action=";
+
+        public static string GetUrl()
+        {
+            return _url;
+        }
+
+        public static void SetUrl(string newUrl)
+        {
+            _url = newUrl;
+        }
+
         public static bool CheckCorrectParameters(string[] props, HashSet<string> supported)
         {
             if (props == null)

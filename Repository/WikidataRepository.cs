@@ -1,19 +1,22 @@
-﻿using Serilog;
+﻿using LinkedDataProjectAPI.Infraestructure;
+using Serilog;
 using System;
 using System.IO;
 using System.Net;
 using System.Security;
+using System.Text.RegularExpressions;
 
 namespace LinkedDataProjectAPI.Repository
 {
     public interface IWikidataRepository
     {
         public string PerformAction(string action, string qs);
+        public bool SetUrl(string newUrl);
     }
 
     public class WikidataRepository : IWikidataRepository
     {
-        private readonly string _url = "https://www.wikidata.org/w/api.php?format=json&action=";
+        private readonly string _url = Utils.GetUrl();
 
         public WikidataRepository()
         {
@@ -23,6 +26,17 @@ namespace LinkedDataProjectAPI.Repository
         public string PerformAction(string action, string qs)
         {
             return FetchUrl(_url + action + qs);
+        }
+
+        public bool SetUrl(string newUrl)
+        {
+            var regex = new Regex(@"(https:\/\/)\w+\.\w+.\w+(\/w\/api.php)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            if(regex.IsMatch(newUrl))
+            {
+                Utils.SetUrl(newUrl + "?format=json&action=");
+                return true;
+            }
+            return false;
         }
 
         private static string FetchUrl(string url)
