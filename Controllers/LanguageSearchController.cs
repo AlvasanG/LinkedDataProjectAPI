@@ -21,6 +21,7 @@ namespace LinkedDataProjectAPI.Controllers
         /// Search for language names in any script.
         /// </summary>
         /// <param name="lang"> String to look for languages.</param>
+        /// <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
         /// <returns> 
         /// Result: Dictionary of strings containing:
         ///     A key equal to the language code.
@@ -32,11 +33,14 @@ namespace LinkedDataProjectAPI.Controllers
         [HttpGet]
         [Route("")]
         [ProducesResponseType ((int) HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
-        public IActionResult GetSingleEntity([FromQuery] string lang)
+        public IActionResult GetSingleEntity([FromQuery] string lang, [FromQuery] int typos = 1)
         {
+            var result = _langSvc.GetLanguagesStartingWith(lang, typos);
             return Ok(new ResponseDto<IDictionary<string, string>>
             {
-                Result = _langSvc.GetLanguagesStartingWith(lang),
+                Result = result.result,
+                Error = result.errors,
+                Warning = result.warnings,
                 Succeeded = true
             });
         }

@@ -20,13 +20,13 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/entity")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto<IDictionary<string, IList<Claim>>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, IList<Claim>>>))]
         public IActionResult GetClaimsByEntity([FromQuery] string entity, [FromQuery] string property, [FromQuery] string rank, [FromQuery] string props)
         {
             var result = _claimsSvc.GetClaims(entity: entity, property: property, rank: rank, props: props);
-            return Ok(new ResponseEntitiesDto<IDictionary<string, IList<Claim>>>
+            return Ok(new ResponseDto<IDictionary<string, IList<Claim>>>
             {
-                Result = result.claims,
+                Result = result.result,
                 Error = result.errors,
                 Warning = result.warnings,
                 Succeeded = true
@@ -35,13 +35,13 @@ namespace LinkedDataProjectAPI.Controllers
 
         [HttpGet]
         [Route("/claimGUID")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseEntitiesDto<IDictionary<string, IList<Claim>>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, IList<Claim>>>))]
         public IActionResult GetClaimsByClaimGUID([FromQuery] string claim, [FromQuery] string property, [FromQuery] string rank, [FromQuery] string props)
         {
             var result = _claimsSvc.GetClaims(claim: claim, property: property, rank: rank, props: props);
-            return Ok(new ResponseEntitiesDto<IDictionary<string, IList<Claim>>>
+            return Ok(new ResponseDto<IDictionary<string, IList<Claim>>>
             {
-                Result = result.claims,
+                Result = result.result,
                 Error = result.errors,
                 Warning = result.warnings,
                 Succeeded = true

@@ -2,22 +2,22 @@
 
 namespace LinkedDataProjectAPI.Infraestructure.Types.DTOs
 {
-    public class EntitySearchValuesDto
+    public class SearchValuesDto<T>
     {
-        public Data data { get; set; }
+        public T result { get; set; }
         public WarningEntities warnings { get; set; }
         public ErrorMessage errors { get; set; }
 
-        public EntitySearchValuesDto()
+        public SearchValuesDto()
         {
-            this.data = new Data();
+            this.result = default;
             this.warnings = new WarningEntities();
             this.errors = new ErrorMessage();
         }
 
-        public EntitySearchValuesDto(Data data, WarningEntities warnings, ErrorMessage errors)
+        public SearchValuesDto(T result, WarningEntities warnings, ErrorMessage errors)
         {
-            this.data = data;
+            this.result = result;
             this.warnings = warnings;
             this.errors = errors;
         }

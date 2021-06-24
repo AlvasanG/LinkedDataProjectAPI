@@ -1,6 +1,9 @@
 ﻿using LinkedDataProjectAPI.Infraestructure.Types;
 using LinkedDataProjectAPI.Infraestructure.Types.Entities.Data;
+using Serilog;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace LinkedDataProjectAPI.Infraestructure
 {
@@ -28,6 +31,18 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             {"references"}
         };
+
+        private static string _url = "https://www.wikidata.org/w/api.php?format=json&action=";
+
+        public static string GetUrl()
+        {
+            return _url;
+        }
+
+        public static void SetUrl(string newUrl)
+        {
+            _url = newUrl;
+        }
 
         public static bool CheckCorrectParameters(string[] props, HashSet<string> supported)
         {
@@ -86,35 +101,129 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             foreach (var entity in data.entities)
             {
-                foreach (var claim in entity.Value.claims)
+                if(entity.Value.type == "property")
                 {
-                    foreach (var c in claim.Value)
+                    continue;
+                }
+                foreach (var claims in entity.Value.claims)
+                {
+                    foreach (var claim in claims.Value)
                     {
-                        var dataValue = c.mainSnak.dataValue;
-                        dataValue.values = new Dictionary<string, string>();
-                        foreach (var token in dataValue.value)
+                        // Values en mainSnak
+                        var dataValue = claim.mainSnak.dataValue;
+                        if (dataValue.values != null)
                         {
-                            dataValue.values.Add(token.Path.ToString(), token.First.ToString());
+                            dataValue.value = UnwrapDataValue(dataValue);
                         }
+
+                        // Values en references
+                        if (claim.references != null && claim.references.Count > 0)
+                        {
+                            foreach(var token in claim.references)
+                            {
+                                foreach(var snak in token.snaks)
+                                {
+                                    foreach(var value in snak.Value)
+                                    {
+                                        dataValue = value.dataValue;
+                                        if (dataValue.values != null)
+                                        {
+                                            dataValue.value = UnwrapDataValue(dataValue);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Values en qualifiers
+                        if(claim.qualifiers != null && claim.qualifiers.Count > 0)
+                        {
+                            foreach (var token in claim.qualifiers)
+                            {
+                                foreach (var snak in token.Value)
+                                {
+                                    dataValue = snak.dataValue;
+                                    if(dataValue.values != null)
+                                    {
+                                        dataValue.value = UnwrapDataValue(dataValue);
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
         }
 
+
         public static void SplitDataValue(ref ClaimList claims)
         {
             foreach (var c in claims.claims.Values)
             {
-                foreach(var claim in c)
+                foreach (var claim in c)
                 {
+                    // Values en mainSnak
                     var dataValue = claim.mainSnak.dataValue;
-                    dataValue.values = new Dictionary<string, string>();
-                    foreach (var token in dataValue.value)
+                    if (dataValue.values != null)
                     {
-                        dataValue.values.Add(token.Path.ToString(), token.First.ToString());
+                        dataValue.value = UnwrapDataValue(dataValue);
                     }
+
+                    // Values en references
+                    if (claim.references != null && claim.references.Count > 0)
+                    {
+                        foreach (var token in claim.references)
+                        {
+                            foreach (var snak in token.snaks)
+                            {
+                                foreach (var value in snak.Value)
+                                {
+                                    dataValue = value.dataValue;
+                                    if (dataValue.values != null)
+                                    {
+                                        dataValue.value = UnwrapDataValue(dataValue);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Values en qualifiers
+                    if (claim.qualifiers != null && claim.qualifiers.Count > 0)
+                    {
+                        foreach (var token in claim.qualifiers)
+                        {
+                            foreach (var snak in token.Value)
+                            {
+                                dataValue = snak.dataValue;
+                                if (dataValue.values != null)
+                                {
+                                    dataValue.value = UnwrapDataValue(dataValue);
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
+        }
+        private static Dictionary<string, string> UnwrapDataValue(DataValue dataValue)
+        {
+            var output = new Dictionary<string, string>();
+            if(dataValue.values.HasValues)
+            {
+                foreach(var token in dataValue.values)
+                {
+                    output.Add(token.Path.ToString(), token.First.ToString());
+                }
+            }
+            else
+            {
+                output.Add("value", dataValue.values.ToString());
+            }
+            dataValue.values = null;
+            return output;
         }
 
     }

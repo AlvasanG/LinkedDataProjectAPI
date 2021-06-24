@@ -11,6 +11,8 @@ namespace LinkedDataProjectAPI.Services
             services.AddScoped<IEntitiesService, EntitiesService>();
             services.AddScoped<ILanguageSearchService, LanguageSearchService>();
             services.AddScoped<IClaimsService, ClaimsService>();
+            services.AddScoped<ISearchEntitiesService, SearchEntitiesService>();
+            services.AddScoped<IWikidataService, WikidataService>();
 
             return services;
         }
