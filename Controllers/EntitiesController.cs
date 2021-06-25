@@ -18,7 +18,7 @@ namespace LinkedDataProjectAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the data for 1 Wikibase entity.
+        /// Gets the data for one Wikibase entity.
         /// </summary>
         /// <param name="search"><see cref="SearchSingleEntityDto"/></param>
         /// <returns> 

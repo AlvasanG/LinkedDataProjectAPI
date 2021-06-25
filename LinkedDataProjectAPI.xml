@@ -6,76 +6,92 @@
     <members>
         <member name="M:LinkedDataProjectAPI.Controllers.ClaimsController.GetClaimsByEntity(System.String,System.String,System.String,System.String)">
             <summary>
-            Search for language names in any script.
+            Gets Wikibase claims.
             </summary>
-            <param name="lang"> String to look for languages.</param>
-            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <param name="entity">ID of the entity from which to obtain claims.</param>
+            <param name="property">Optional filter to only return claims with a main snak that has the specified property.</param>
+            <param name="rank">Optional filter to return only the claims that have the specified rank.</param>
+            <param name="props">Controls which parts of the claim are returned.</param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data source.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
         <member name="M:LinkedDataProjectAPI.Controllers.ClaimsController.GetClaimsByClaimGUID(System.String,System.String,System.String,System.String)">
             <summary>
-            Search for language names in any script.
+            Gets Wikibase claims
             </summary>
-            <param name="lang"> String to look for languages.</param>
-            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <param name="claim">A GUID identifying the claim. GUID is the Globally Unique Identifier for a claim.</param>
+            <param name="property">Optional filter to only return claims with a main snak that has the specified property.</param>
+            <param name="rank">Optional filter to return only the claims that have the specified rank.</param>
+            <param name="props">Controls which parts of the claim are returned.</param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data source.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
         <member name="M:LinkedDataProjectAPI.Controllers.ConfigurationController.SetUrl(System.String)">
             <summary>
-            Search for language names in any script.
+            Changes the data source. Must suffice https://www.example.org/w/api.php format.
             </summary>
-            <param name="lang"> String to look for languages.</param>
-            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
-            <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
-            Succeeded: True if the API could respond.
-            </returns>
+            <param name="newDataSource">New data source.</param>
+            <returns>True if the new data supplier is valid. False otherwise.</returns>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto.ids">
+            <summary>
+            IDs of the entities to get data from.
+            </summary>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto.languages">
+            <summary>
+            Filter languages on which the returned values will be available.
+            </summary>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto.props">
+            <summary>
+            The names of the properties to get back from each entity.
+            </summary>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto.id">
+            <summary>
+            Id of the entity to get data from.
+            </summary>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto.languages">
+            <summary>
+            Filter languages on which the returned values will be available.
+            </summary>
+        </member>
+        <member name="P:LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto.props">
+            <summary>
+            The names of the properties to get back from each entity.
+            </summary>
         </member>
         <member name="M:LinkedDataProjectAPI.Controllers.EntitiesController.GetSingleEntity(LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto)">
             <summary>
-            Search for language names in any script.
+            Gets the data for 1 Wikibase entity.
             </summary>
-            <param name="lang"> String to look for languages.</param>
-            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <param name="search"><see cref="T:LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto"/></param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data source.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
         <member name="M:LinkedDataProjectAPI.Controllers.EntitiesController.GetMultipleEntities(LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto)">
             <summary>
-            Search for language names in any script.
+            Gets the data for multiple Wikibase entities.
             </summary>
-            <param name="lang"> String to look for languages.</param>
-            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <param name="search"><see cref="T:LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto"/></param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data source.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
@@ -86,11 +102,9 @@
             <param name="lang"> String to look for languages.</param>
             <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data supplier.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
@@ -98,20 +112,18 @@
             <summary>
             Search for entities using labels and aliases.
             </summary>
-            <param name="search">Required. Search for this text.</param>
-            <param name="language"></param>
-            <param name="useLang"></param>
-            <param name="strict"></param>
-            <param name="type"></param>
-            <param name="limit"></param>
-            <param name="continueFrom"></param>
-            <param name="props"></param>
+            <param name="search">Search for this text.</param>
+            <param name="language">Search in this language. Affects how entities are selected, not the result.</param>
+            <param name="useLang">Search in this language. Defines the language on which the entities are returned.</param>
+            <param name="strict">Whether to disable language fallback.</param>
+            <param name="type">Search for this type of entity.</param>
+            <param name="limit">Maximal number of results.</param>
+            <param name="continueFrom">Offset where to continue a search.</param>
+            <param name="props">Return these properties for each entity.</param>
             <returns> 
-            Result: Dictionary of strings containing:
-                A key equal to the language code.
-                A value equal to the name of the language.
-            Error: An error code on field "code" and extra information on field "info".
-            Warning: A warning description on field "main".
+            Result: Information returned by the data source.
+            Error: Errors ocurred while recovering the information.
+            Warning: Warnings occurred while recovering the information.
             Succeeded: True if the API could respond.
             </returns>
         </member>
