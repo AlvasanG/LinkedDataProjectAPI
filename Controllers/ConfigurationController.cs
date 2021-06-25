@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,11 +19,16 @@ namespace LinkedDataProjectAPI.Controllers
             _wikidata = wikidata;
         }
 
+        /// <summary>
+        /// Changes the data source. Must suffice https://www.example.org/w/api.php format.
+        /// </summary>
+        /// <param name="newDataSource">New data source.</param>
+        /// <returns>True if the new data supplier is valid. False otherwise.</returns>
         [HttpPost]
-        [Route("/ChangeUrl")]
-        public bool SetUrl([FromQuery] string newUrl)
+        [Route("/ChangeDataUrl")]
+        public bool SetUrl([FromQuery][Required] string newDataSource)
         {
-            return _wikidata.SetUrl(newUrl);
+            return _wikidata.SetUrl(newDataSource);
         }
     }
 }

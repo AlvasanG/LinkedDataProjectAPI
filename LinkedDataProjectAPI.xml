@@ -4,6 +4,81 @@
         <name>LinkedDataProjectAPI</name>
     </assembly>
     <members>
+        <member name="M:LinkedDataProjectAPI.Controllers.ClaimsController.GetClaimsByEntity(System.String,System.String,System.String,System.String)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Controllers.ClaimsController.GetClaimsByClaimGUID(System.String,System.String,System.String,System.String)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Controllers.ConfigurationController.SetUrl(System.String)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Controllers.EntitiesController.GetSingleEntity(LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Controllers.EntitiesController.GetMultipleEntities(LinkedDataProjectAPI.Controllers.DTOs.SearchEntityDto)">
+            <summary>
+            Search for language names in any script.
+            </summary>
+            <param name="lang"> String to look for languages.</param>
+            <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
         <member name="M:LinkedDataProjectAPI.Controllers.LanguageSearchController.GetSingleEntity(System.String,System.Int32)">
             <summary>
             Search for language names in any script.
@@ -18,6 +93,105 @@
             Warning: A warning description on field "main".
             Succeeded: True if the API could respond.
             </returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Controllers.SearchEntitiesController.GetSearchEntities(System.String,System.String,System.String,System.Boolean,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Search for entities using labels and aliases.
+            </summary>
+            <param name="search">Required. Search for this text.</param>
+            <param name="language"></param>
+            <param name="useLang"></param>
+            <param name="strict"></param>
+            <param name="type"></param>
+            <param name="limit"></param>
+            <param name="continueFrom"></param>
+            <param name="props"></param>
+            <returns> 
+            Result: Dictionary of strings containing:
+                A key equal to the language code.
+                A value equal to the name of the language.
+            Error: An error code on field "code" and extra information on field "info".
+            Warning: A warning description on field "main".
+            Succeeded: True if the API could respond.
+            </returns>
+        </member>
+        <member name="F:LinkedDataProjectAPI.Infraestructure.Utils._supportedEntitiesParameters">
+            <summary>
+            Contains a list of the supported parameters for wbgetentities
+            </summary>
+        </member>
+        <member name="F:LinkedDataProjectAPI.Infraestructure.Utils._supportedClaimsRanks">
+            <summary>
+            Contains a list of the supported ranks for wbgetclaims
+            </summary>
+        </member>
+        <member name="F:LinkedDataProjectAPI.Infraestructure.Utils._supportedClaimsProps">
+            <summary>
+            Contains a list of the supported props for wbgetclaims
+            </summary>
+        </member>
+        <member name="F:LinkedDataProjectAPI.Infraestructure.Utils._url">
+            <summary>
+            References the data source that will be queried via actions.
+            Format is json to allow the application to deserialize it.
+            </summary>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.GetUrl">
+            <summary>
+            Provides the value of the data source
+            </summary>
+            <returns> String containing the data source</returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.SetUrl(System.String)">
+            <summary>
+            Allows to change the data source by specifing a new data source in 
+            https://www.example.org/w/api.php format.
+            </summary>
+            <param name="newUrl"> The new data source </param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.CheckCorrectParameters(System.String[],System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Check whether a set of strings are supported parameters or not.
+            </summary>
+            <param name="props">Set of strings to be tested.</param>
+            <param name="supported">Supported set of strings.</param>
+            <returns>True if all the strings are supported, else false.</returns>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.ConcatenateToUrl(System.String,System.String)">
+            <summary>
+            Builds a string containing a parameter and its values.
+            </summary>
+            <param name="parameter">Parameter to build</param>
+            <param name="prop">String representing the value of the parameter.</param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.ConcatenateToUrl(System.String,System.String[])">
+            <summary>
+            Builds a string containing a parameter and its values.
+            </summary>
+            <param name="parameter">Parameter to build</param>
+            <param name="props">List of strings representing the value of the parameter.</param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.Merge``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Merges two dictionaries together into mainDic.
+            </summary>
+            <typeparam name="V">Type of the keys.</typeparam>
+            <typeparam name="K">Type of the values.</typeparam>
+            <param name="mainDic">Dictionary where you want to store the values of secondDic.</param>
+            <param name="secondDic">Dictionary containing values to be added to mainDic.</param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.SplitDataValue(LinkedDataProjectAPI.Infraestructure.Types.Data@)">
+            <param name="data"> Data containing the entities.</param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.SplitDataValue(LinkedDataProjectAPI.Infraestructure.Types.Entities.Data.ClaimList@)">
+            <param name="claims"> List of claims containing the JTokens.</param>
+        </member>
+        <member name="M:LinkedDataProjectAPI.Infraestructure.Utils.UnwrapDataValue(LinkedDataProjectAPI.Infraestructure.Types.DataValue)">
+            <summary>
+            Performs the operation of unwrapping and sets the temporary field values to null after it has finished unwrapping.
+            </summary>
+            <param name="dataValue">DataValue containing the JToken.</param>
+            <returns>Dictionary containing the values of the JToken unwrapped.</returns>
         </member>
     </members>
 </doc>
