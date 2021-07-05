@@ -30,7 +30,7 @@ namespace LinkedDataProjectAPI.Controllers
         /// </returns>
         [HttpGet]
         [Route("")]
-        [ProducesResponseType ((int) HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
         public IActionResult GetSingleEntity([FromQuery] string lang, [FromQuery] int typos = 1)
         {
             var result = _langSvc.GetLanguagesStartingWith(lang, typos);

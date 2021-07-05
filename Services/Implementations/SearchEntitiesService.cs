@@ -42,12 +42,12 @@ namespace LinkedDataProjectAPI.Services.Implementations
                 var warnings = JsonConvert.DeserializeObject<WarningEntities>(stringData);
                 var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
                 return new SearchValuesDto<SearchResultObj>(data, warnings, errors);
-        }
+            }
             catch (JsonException)
             {
                 Log.Error("Something went wrong parsing the query response.");
                 return new SearchValuesDto<SearchResultObj>();
             }
-}
+        }
     }
 }

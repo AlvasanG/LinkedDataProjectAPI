@@ -11,7 +11,7 @@ namespace LinkedDataProjectAPI.Infraestructure.Types
         public int id { get; set; }
         public IEnumerable<Message> messages { get; set; }
         [JsonProperty("*")]
-        public string star {get; set; }
+        public string star { get; set; }
 
         public Error()
         {

@@ -31,7 +31,7 @@ namespace LinkedDataProjectAPI.Repository
         public bool SetUrl(string newUrl)
         {
             var regex = new Regex(@"(https:\/\/)\w+\.\w+.\w+(\/w\/api.php)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            if(regex.IsMatch(newUrl))
+            if (regex.IsMatch(newUrl))
             {
                 Utils.SetUrl(newUrl + "?format=json&action=");
                 return true;

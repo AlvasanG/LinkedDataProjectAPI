@@ -73,7 +73,7 @@
         </member>
         <member name="M:LinkedDataProjectAPI.Controllers.EntitiesController.GetSingleEntity(LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto)">
             <summary>
-            Gets the data for 1 Wikibase entity.
+            Gets the data for one Wikibase entity.
             </summary>
             <param name="search"><see cref="T:LinkedDataProjectAPI.Controllers.DTOs.SearchSingleEntityDto"/></param>
             <returns> 

@@ -1,9 +1,6 @@
 ﻿using LinkedDataProjectAPI.Infraestructure.Types;
 using LinkedDataProjectAPI.Infraestructure.Types.Entities.Data;
-using Serilog;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace LinkedDataProjectAPI.Infraestructure
 {
@@ -150,7 +147,7 @@ namespace LinkedDataProjectAPI.Infraestructure
         {
             foreach (var entity in data.entities)
             {
-                if(entity.Value.type == "property")
+                if (entity.Value.type == "property")
                 {
                     continue;
                 }
@@ -168,11 +165,11 @@ namespace LinkedDataProjectAPI.Infraestructure
                         // Values in references
                         if (claim.references != null && claim.references.Count > 0)
                         {
-                            foreach(var token in claim.references)
+                            foreach (var token in claim.references)
                             {
-                                foreach(var snak in token.snaks)
+                                foreach (var snak in token.snaks)
                                 {
-                                    foreach(var value in snak.Value)
+                                    foreach (var value in snak.Value)
                                     {
                                         dataValue = value.dataValue;
                                         if (dataValue.values != null)
@@ -185,14 +182,14 @@ namespace LinkedDataProjectAPI.Infraestructure
                         }
 
                         // Values in qualifiers
-                        if(claim.qualifiers != null && claim.qualifiers.Count > 0)
+                        if (claim.qualifiers != null && claim.qualifiers.Count > 0)
                         {
                             foreach (var token in claim.qualifiers)
                             {
                                 foreach (var snak in token.Value)
                                 {
                                     dataValue = snak.dataValue;
-                                    if(dataValue.values != null)
+                                    if (dataValue.values != null)
                                     {
                                         dataValue.value = UnwrapDataValue(dataValue);
                                     }
@@ -268,9 +265,9 @@ namespace LinkedDataProjectAPI.Infraestructure
         private static Dictionary<string, string> UnwrapDataValue(DataValue dataValue)
         {
             var output = new Dictionary<string, string>();
-            if(dataValue.values.HasValues)
+            if (dataValue.values.HasValues)
             {
-                foreach(var token in dataValue.values)
+                foreach (var token in dataValue.values)
                 {
                     output.Add(token.Path.ToString(), token.First.ToString());
                 }

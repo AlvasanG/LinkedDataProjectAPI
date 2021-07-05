@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning
+﻿namespace LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning
 {
     public class WarningEntities
     {
