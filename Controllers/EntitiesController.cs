@@ -17,6 +17,16 @@ namespace LinkedDataProjectAPI.Controllers
             _entitySvc = entitySvc;
         }
 
+        /// <summary>
+        /// Gets the data for one Wikibase entity.
+        /// </summary>
+        /// <param name="search"><see cref="SearchSingleEntityDto"/></param>
+        /// <returns> 
+        /// Result: Information returned by the data source.
+        /// Error: Errors ocurred while recovering the information.
+        /// Warning: Warnings occurred while recovering the information.
+        /// Succeeded: True if the API could respond.
+        /// </returns>
         [HttpGet]
         [Route("/single")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<Data>))]
@@ -32,6 +42,16 @@ namespace LinkedDataProjectAPI.Controllers
             });
         }
 
+        /// <summary>
+        /// Gets the data for multiple Wikibase entities.
+        /// </summary>
+        /// <param name="search"><see cref="SearchEntityDto"/></param>
+        /// <returns> 
+        /// Result: Information returned by the data source.
+        /// Error: Errors ocurred while recovering the information.
+        /// Warning: Warnings occurred while recovering the information.
+        /// Succeeded: True if the API could respond.
+        /// </returns>
         [HttpGet]
         [Route("/multiple")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<Data>))]

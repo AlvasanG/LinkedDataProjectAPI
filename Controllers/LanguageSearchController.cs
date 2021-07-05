@@ -23,16 +23,14 @@ namespace LinkedDataProjectAPI.Controllers
         /// <param name="lang"> String to look for languages.</param>
         /// <param name="typos"> Number of spelling mistakes allowed in the search string.</param>
         /// <returns> 
-        /// Result: Dictionary of strings containing:
-        ///     A key equal to the language code.
-        ///     A value equal to the name of the language.
-        /// Error: An error code on field "code" and extra information on field "info".
-        /// Warning: A warning description on field "main".
+        /// Result: Information returned by the data supplier.
+        /// Error: Errors ocurred while recovering the information.
+        /// Warning: Warnings occurred while recovering the information.
         /// Succeeded: True if the API could respond.
         /// </returns>
         [HttpGet]
         [Route("")]
-        [ProducesResponseType ((int) HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseDto<IDictionary<string, string>>))]
         public IActionResult GetSingleEntity([FromQuery] string lang, [FromQuery] int typos = 1)
         {
             var result = _langSvc.GetLanguagesStartingWith(lang, typos);

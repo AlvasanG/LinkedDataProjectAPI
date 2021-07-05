@@ -6,10 +6,7 @@ using LinkedDataProjectAPI.Infraestructure.Types.Entities.Warning;
 using LinkedDataProjectAPI.Repository;
 using Newtonsoft.Json;
 using Serilog;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LinkedDataProjectAPI.Services.Implementations
 {
@@ -28,7 +25,7 @@ namespace LinkedDataProjectAPI.Services.Implementations
             _wikiRepo = wikidataRepository;
         }
 
-        public SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaims (string entity = null, string claim = null, string property = null, string rank = null, string props = null)
+        public SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaims(string entity = null, string claim = null, string property = null, string rank = null, string props = null)
         {
             if (entity != null)
             {
@@ -38,11 +35,11 @@ namespace LinkedDataProjectAPI.Services.Implementations
             {
                 return GetClaimsForId("claim", claim, property, rank, props);
             }
-            return new SearchValuesDto<IDictionary<string, IList<Claim>>>();         
+            return new SearchValuesDto<IDictionary<string, IList<Claim>>>();
         }
 
 
-        private SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaimsForId (string propName, string id, string property = null, string rank = null, string props = null)
+        private SearchValuesDto<IDictionary<string, IList<Claim>>> GetClaimsForId(string propName, string id, string property = null, string rank = null, string props = null)
         {
             string qs = Utils.ConcatenateToUrl(propName, id);
             qs += Utils.ConcatenateToUrl("property", property);
@@ -52,7 +49,10 @@ namespace LinkedDataProjectAPI.Services.Implementations
             try
             {
                 var data = JsonConvert.DeserializeObject<ClaimList>(stringData);
-                Utils.SplitDataValue(ref data);
+                if(data != null)
+                {
+                    Utils.SplitDataValue(ref data);
+                }
                 var warnings = JsonConvert.DeserializeObject<WarningEntities>(stringData);
                 var errors = JsonConvert.DeserializeObject<ErrorMessage>(stringData);
                 return new SearchValuesDto<IDictionary<string, IList<Claim>>>(data.claims, warnings, errors);
